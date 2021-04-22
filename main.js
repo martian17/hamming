@@ -68,13 +68,17 @@ var Hamming = function(n){//2 to the n  bits of parity
     };
 };
 
-var hamming = new Hamming(5);
+var hamming = new Hamming(4);
 
-var data0 = [0,1,1,0,1,0,1,0];
-console.log(data0);
+var data0 = [0,1,1,0,1,0,1,0,0,1,1];
+console.log("original data:    "+JSON.stringify(data0));
+console.log("encoding");
 var coded = hamming.encode(data0);
-coded[0][5] ^= 1;
+var erridx = 5;
+coded[0][erridx] ^= 1;
+console.log("introducing error at block 0 bit "+erridx);
 //introducing error
-console.log(coded);
+console.log("blocks:           "+JSON.stringify(coded));
 var data1 = hamming.decode(coded);
-console.log(data1);
+console.log("corrected result: "+JSON.stringify(data1));
+console.log("corrected bit has been marked by []");
